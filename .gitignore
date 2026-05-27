@@ -1,0 +1,70 @@
+# IDE e Editores
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+*.code-workspace
+
+# IDEs específicas
+.ionide/
+.localhistory/
+
+# Compilação e Build
+build/
+dist/
+*.o
+*.a
+*.so
+*.dylib
+*.dll
+*.exe
+*.app
+*.out
+
+# CMake
+CMakeLists.txt.user
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+CMakeUserPresets.json
+cmake_install.cmake
+compile_commands.json
+_deps/
+
+# Debug
+*.dSYM/
+*.pdb
+*.idb
+*.su
+
+# Node.js (para frontend)
+node_modules/
+npm-debug.log
+yarn-error.log
+*.tsbuildinfo
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+env/
+
+# Sistema Operacional
+.DS_Store
+Thumbs.db
+*.swp
+
+# Arquivos de Configuração Local
+.env
+.env.local
+
+# Logs
+*.log
+logs/
+
+# Arquivos Temporários
+*.tmp
+tmp/
+temp/

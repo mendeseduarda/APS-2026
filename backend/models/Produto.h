@@ -13,7 +13,7 @@ class Produto {
     Produto() = default; 
     
         int getId() const {
-            return id;
+            return this-> id;
         }
 
         void setId(int id) {
@@ -21,7 +21,7 @@ class Produto {
         }
 
         std::string getNome() const {
-            return nome;
+            return this-> nome;
         }
 
         void setNome(const std::string& nome) {
@@ -29,7 +29,7 @@ class Produto {
         }
 
         double getPreco() const {
-            return preco;
+            return this-> preco;
         }
 
         void setPreco(double preco) {
@@ -37,7 +37,7 @@ class Produto {
         }
 
         int getEstoque() const {
-            return estoque;
+            return this-> estoque;
         }
 
         void setEstoque(int estoque) {

@@ -9,7 +9,7 @@ class Cliente : public Pessoa {
     Cliente() = default;  
 
         Endereco getEndereco() const {
-            return endereco;
+            return this-> endereco;
         }
 
         void setEndereco(const Endereco& e) {

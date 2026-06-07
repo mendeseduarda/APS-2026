@@ -13,7 +13,7 @@ class Pessoa {
     Pessoa() = default;
     
         int getId() const {
-            return id;
+            return this-> id;
         }
 
         void setId(int id) {
@@ -21,7 +21,7 @@ class Pessoa {
         }
 
         std::string getNome() const {
-            return nome;
+            return this-> nome;
         }
 
         void setNome(const std::string& nome) {
@@ -29,7 +29,7 @@ class Pessoa {
         }
 
         std::string getCpf() const {
-            return cpf;
+            return this-> cpf;
         }
 
         void setCpf(const std::string& cpf) {
@@ -37,7 +37,7 @@ class Pessoa {
         }
 
         std::string getTelefone() const {
-            return telefone;
+            return this-> telefone;
         }
 
         void setTelefone(const std::string& telefone) {

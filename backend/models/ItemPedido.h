@@ -4,6 +4,7 @@
 
 class ItemPedido {
     private:
+        int id; //autoinclemento
         Produto produto;
         int quantidade;
         double precoVenda;
@@ -12,8 +13,16 @@ class ItemPedido {
     public:
     ItemPedido() = default;
 
+        int getId() const {
+            return this-> id;
+        }
+
+        void setId(int i) {
+            this->id = i;
+        }
+
         Produto getProduto() const {
-            return produto;
+            return this-> produto;
         }
 
         void setProduto(const Produto& produto) {
@@ -21,7 +30,7 @@ class ItemPedido {
         }
 
         int getQuantidade() const {
-            return quantidade;
+            return this->quantidade;
         }
 
         void setQuantidade(int quantidade) {
@@ -29,7 +38,7 @@ class ItemPedido {
         }
 
         double getPrecoVenda() const {
-            return precoVenda;
+            return this->precoVenda;
         }
 
         void setPrecoVenda(double precoVenda) {
@@ -37,7 +46,7 @@ class ItemPedido {
         }
 
         bool getRealizaTrocaBotijao() const {
-            return realizaTrocaBotijao;
+            return this->realizaTrocaBotijao;
         }
 
         void setRealizaTrocaBotijao(bool realizaTrocaBotijao) {

@@ -2,12 +2,21 @@
 
 class Cupom {
     private:
+        int id; //autoinclemento
         int codigo;
         double desconto;
     
     public:
+        int getId() const {
+            return this-> id;
+        }
+
+        void setId(int i) {
+            this->id = i;
+        }
+
         int getCodigo() const{
-            return codigo;
+            return this-> codigo;
         }
 
         void setCodigo(int c) {
@@ -15,7 +24,7 @@ class Cupom {
         }
 
         double getDesconto() const {
-            return desconto;
+            return this-> desconto;
         }
 
         void setDesconto(double d) {

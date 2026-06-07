@@ -1,35 +1,93 @@
-#include <PedidoManager.h>
-#include <string>
+#include "PedidoManager.h"
 
-void PedidoManager::iniciaAdicaoProduto() {};
+#include "DAOManager.h"
+
+#include "../Models/Pedido.h"
+#include "../Models/Produto.h"
+#include "../Models/ItemPedido.h"
+#include "../Models/Cupom.h"
+#include "../Models/Pagamento.h"
+
+void PedidoManager::iniciaAdicaoProduto() {
+
+    pedidoAtual = Pedido();
+}
 
 void PedidoManager::informaProduto(
     int idProduto,
     int quantidade
-) {};
+) {
+
+    ProdutoDAO& produtoDAO =
+        DaoMgr::getProdutoDAO();
+
+    Produto produto =
+        produtoDAO.retrieve(idProduto);
+
+    ItemPedido item;
+
+    item.setProduto(produto);
+    item.setQuantidade(quantidade);
+
+    pedidoAtual.adicionarItem(item);
+}
 
 void PedidoManager::informaAdicaoGas(
     bool adicionaGas
-) {};
+) {
+
+    pedidoAtual.setAdicionaGas(adicionaGas);
+}
 
 void PedidoManager::informaModalidade(
-    bool modalidade
-) {};
+    bool trocaCasco
+) {
 
-void PedidoManager::iniciaFinalizacaoPedido(
+    pedidoAtual.setTrocaCasco(trocaCasco);
+}
 
-) {};
+void PedidoManager::iniciaFinalizacaoPedido() {
+
+    pedidoAtual.calcularValorTotal();
+}
 
 void PedidoManager::insereCupom(
-    int CodigoPromocional
-) {};
+    int codigoCupom
+) {
+
+    CupomDAO& cupomDAO =
+        DaoMgr::getCupomDAO();
+
+    Cupom cupom =
+        cupomDAO.retrieve(codigoCupom);
+
+    pedidoAtual.setCupom(cupom);
+}
 
 void PedidoManager::confirmaEndereco(
     const Endereco& endereco
-) {};
+) {
+
+    pedidoAtual.setEndereco(endereco);
+}
 
 void PedidoManager::informaPagamento(
-    const std::string& metodoPagamento
-) {};
+    int idPagamento
+) {
 
-void PedidoManager::confirmaPedido() {};
+    PagamentoDAO& pagamentoDAO =
+        DaoMgr::getPagamentoDAO();
+
+    Pagamento pagamento =
+        pagamentoDAO.retrieve(idPagamento);
+
+    pedidoAtual.setPagamento(pagamento);
+}
+
+void PedidoManager::confirmaPedido() {
+
+    PedidoDAO& pedidoDAO =
+        DaoMgr::getPedidoDAO();
+
+    pedidoDAO.create(pedidoAtual);
+}

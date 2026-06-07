@@ -4,6 +4,7 @@
 
 class Endereco {
     private:
+        int id; //autoinclemento
         std::string cep;
         std::string tipoLogradouro;
         std::string nomeLogradouro;
@@ -12,6 +13,16 @@ class Endereco {
         std::string complemento;
 
     public:
+        Endereco() = default;
+
+        int getId() const {
+            return id;
+        }
+
+        void setId(int i) {
+            this->id = i;
+        }
+
         std::string getCep() const {
             return cep;
         }

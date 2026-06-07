@@ -4,14 +4,23 @@
 
 class Pagamento {
     private:
+        int id; //autoinclemento
         std::string formaPagamento;
         bool status;
 
     public:
     Pagamento() = default; 
 
+        int getId() const {
+            return this-> id;
+        }
+
+        void setId(int i) {
+            this->id = i;
+        }
+
         std::string getFormaPagamento() const{
-            return formaPagamento;
+            return this-> formaPagamento;
         }
 
         void setFormaPagamento(const std::string& forma) {
@@ -19,7 +28,7 @@ class Pagamento {
         }
 
         bool getStatus() const {
-            return status;
+            return this-> status;
         }
 
         void setStatus(bool s) {

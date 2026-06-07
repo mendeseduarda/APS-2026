@@ -1,36 +1,45 @@
+#pragma once
+
 #include <string>
+
+#include "../Models/Pedido.h"
 #include "../Models/Endereco.h"
 
 class PedidoManager {
-    public:
-        void iniciaAdicaoProduto();
 
-        void informaProduto(
-            int idProduto, 
-            int quantidade
-        );
+private:
+    Pedido pedidoAtual;
 
-        void informaAdicaoGas(
-            bool adicionaGas
-        );
+public:
 
-        void informaModalidade(
-            bool modalidade //troca ou nao 
-        );
+    void iniciaAdicaoProduto();
 
-        void iniciaFinalizacaoPedido();
+    void informaProduto(
+        int idProduto,
+        int quantidade
+    );
 
-        void insereCupom(
-            int CodigoPromocional
-        );
+    void informaAdicaoGas(
+        bool adicionaGas
+    );
 
-        void confirmaEndereco(
-            const Endereco& endereco
-        );
-        
-        void informaPagamento(
-            const std::string& metodoPagamento
-        );
+    void informaModalidade(
+        bool trocaCasco
+    );
 
-        void confirmaPedido();
+    void iniciaFinalizacaoPedido();
+
+    void insereCupom(
+        int codigoCupom
+    );
+
+    void confirmaEndereco(
+        const Endereco& endereco
+    );
+
+    void informaPagamento(
+        int idPagamento
+    );
+
+    void confirmaPedido();
 };

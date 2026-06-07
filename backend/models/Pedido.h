@@ -13,6 +13,7 @@
 class Pedido {
     private:
         int id;
+        int codigo;
         Cliente cliente;
         Funcionario funcionario;
         std::vector<ItemPedido> itens;
@@ -26,16 +27,23 @@ class Pedido {
     public:
         Pedido() = default; 
 
+
         int getId() const {
-            return id;
+            return this-> id;
         }
 
         void setId(int id) {
             this->id = id;
         }
 
+        int getCodigo() const {
+            return this-> codigo;
+        }   
+        void setCodigo(int codigo) {
+            this->codigo = codigo;
+        }
         Cliente getCliente() const {
-            return cliente;
+            return this-> cliente;
         }
 
         void setCliente(const Cliente& cliente) {
@@ -43,7 +51,7 @@ class Pedido {
         }
 
         Funcionario getFuncionario() const {
-            return funcionario;
+            return this-> funcionario;
         }
 
         void setFuncionario(const Funcionario& funcionario) {
@@ -51,7 +59,7 @@ class Pedido {
         }
 
         std::vector<ItemPedido> getItens() const {
-            return itens;
+            return this->itens;
         }
 
         void setItens(const std::vector<ItemPedido>& itens) {
@@ -59,7 +67,7 @@ class Pedido {
         }
 
         Endereco getEndereco() const {
-            return endereco;
+            return this->endereco;
         }
 
         void setEndereco(const Endereco& endereco) {
@@ -67,7 +75,7 @@ class Pedido {
         }
 
         Pagamento getPagamento() const {
-            return pagamento;
+            return this->pagamento;
         }
 
         void setPagamento(const Pagamento& pagamento) {
@@ -75,7 +83,7 @@ class Pedido {
         }
 
         std::time_t getDataHoraInicial() const {
-            return dataHoraInicial;
+            return this->dataHoraInicial;
         }
 
         void setDataHoraInicial(std::time_t dataHoraInicial) {
@@ -83,7 +91,7 @@ class Pedido {
         }
 
         std::time_t getDataHoraFinal() const {
-            return dataHoraFinal;
+            return this->dataHoraFinal;
         }
 
         void setDataHoraFinal(std::time_t dataHoraFinal) {
@@ -91,7 +99,7 @@ class Pedido {
         }
 
         double getValorTotal() const {
-            return valorTotal;
+            return this->valorTotal;
         }
 
         void setValorTotal(double valorTotal) {
@@ -99,7 +107,7 @@ class Pedido {
         }
 
         std::string getStatus() const {
-            return status;
+            return this->status;
         }
 
         void setStatus(const std::string& status) {

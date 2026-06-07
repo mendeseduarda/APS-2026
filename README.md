@@ -9,7 +9,7 @@
 - **Maria Eduarda Mendes:** [github.com/mendeseduarda](https://github.com/mendeseduarda)
 - **Isabela Kawashima:** [github.com/isakawashima-lab](https://github.com/isakawashima-lab)
 - **Izabela Sanitá:** [github.com/izabelasanita](https://github.com/izabelasanita)
-
+- **Vinicius** 
 
 ---
 
@@ -42,9 +42,9 @@ Responsável por:
 **Estrutura OO:**
 - **Models** - Objetos de domínio
 - **DAOs** - Acesso a dados
-- **Services** - Lógica de negócio
+- **Managers** - Lógica de negócio
 - **Controllers** - Endpoints HTTP
-- **DVOs** - Valores imutáveis
+
 
 ---
 
@@ -88,11 +88,9 @@ APS-2026/
 │   ├── main.cc
 │   ├── models/
 │   ├── controllers/
+│   ├── Managers/
 │   ├── DAOs/
-│   ├── Services/
-│   ├── DVOs/
 │   ├── utils/
-│   └── filters/
 └── frontend/                    # Interface do usuário
     └── README.md               # Documentação do frontend
 ```

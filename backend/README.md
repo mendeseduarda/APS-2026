@@ -16,8 +16,7 @@ backend/
 ├── models/                 # Objetos de domínio
 ├── controllers/            # Endpoints HTTP
 ├── DAOs/                   # Acesso a dados
-├── Services/               # Lógica de negócio
-├── DVOs/                   # Data Value Objects (valores imutáveis)
+├── Managers/               # Lógica de negócio
 ├── utils/                  # Utilitários e helpers
 ├── filters/                # Filtros do Drogon
 └── build/                  # Arquivos compilados (gerado)
@@ -77,13 +76,13 @@ private:
 
 ---
 
-### **3. Services** (`services/`)
+### **3. Managers** (`Managers/`)
 Contêm a **lógica de negócio** da aplicação. Usam DAOs para acessar dados e aplicam regras.
 
 **Exemplo:**
 ```cpp
-// services/UserService.h
-class UserService {
+// Managers/UserManager.h
+class UserManager {
 public:
     User authenticate(const std::string& email, const std::string& password);
     User registerUser(const std::string& name, const std::string& email, const std::string& password);
@@ -100,7 +99,7 @@ private:
 ---
 
 ### **4. Controllers** (`controllers/`)
-Endpoints HTTP que **recebem requisições** e retornam respostas. Usam Services.
+Endpoints HTTP que **recebem requisições** e retornam respostas. Usam Managers.
 
 **Exemplo:**
 ```cpp
@@ -120,65 +119,16 @@ public:
                     std::function<void(const drogon::HttpResponsePtr&)>&& callback);
                     
 private:
-    UserService userService;
+    UserManager userManager;
 };
 ```
 
-**Responsabilidade:** Parse de requisições, chamadas a Services, formatação de respostas.
+**Responsabilidade:** Parse de requisições, chamadas a Manager, formatação de respostas.
 
 ---
 
-### **5. DVOs** (`DVOs/`)
-**Data Value Objects** - Objetos que representam **valores imutáveis** sem identidade própria.
-
-**Diferença:**
 - **Models** = Objetos com ID (User, Product) - Dois users com ID 1 são o MESMO
-- **DVOs** = Valores sem ID (Endereco, Coordenada, Moeda) - Dois endereços iguais são IGUAIS
 
-**Exemplo:**
-```cpp
-// DVOs/Address.h
-class Address {
-private:
-    std::string street;
-    std::string number;
-    std::string city;
-    std::string zipCode;
-    
-public:
-    Address(const std::string& street, const std::string& number, 
-            const std::string& city, const std::string& zipCode);
-    
-    std::string getStreet() const { return street; }
-    std::string getNumber() const { return number; }
-    std::string getCity() const { return city; }
-    std::string getZipCode() const { return zipCode; }
-    
-    // DVOs geralmente têm equals e hash
-    bool operator==(const Address& other) const {
-        return street == other.street && number == other.number &&
-               city == other.city && zipCode == other.zipCode;
-    }
-};
-
-// DVOs/Money.h
-class Money {
-private:
-    double amount;
-    std::string currency;  // "BRL", "USD", etc
-    
-public:
-    Money(double amount, const std::string& currency);
-    
-    double getAmount() const { return amount; }
-    std::string getCurrency() const { return currency; }
-    
-    Money add(const Money& other) const {
-        // Valida se mesma moeda
-        return Money(amount + other.amount, currency);
-    }
-};
-```
 
 **Uso em Models:**
 ```cpp
@@ -239,24 +189,19 @@ HTTP Request (JSON)
 [Filters] - Validação, autenticação, headers
 [Controller] - Recebe DTO
     ↓
-[Service] - Aplica regras de negócio
+[Manager] - Aplica regras de negócio
     ↓
 [DAO] - Acessa banco de dados
     ↓
 [Model] - Persiste/Recupera objeto
     ↓
-[Service] - Processa resultado
+[Manager] - Processa resultado
 [Controller] - Converte para JSON
     ↓
 HTTP Response (JSON)
 ```
 
 ---
-
-## 💾 Estrutura do Banco de Dados
-
-O arquivo `models/model.json` define o schema do banco de dados e é usado pelo Drogon para gerar classes ORM.
-
 ---
 
 ## 🚀 Como Adicionar uma Nova Entidade
@@ -285,10 +230,10 @@ public:
 };
 ```
 
-### 3. Criar Service
+### 3. Criar Manager
 ```cpp
-// services/ProductService.h
-class ProductService {
+//Manager/ProductManager.h
+class ProductManager {
 private:
     ProductDAO productDAO;
 public:
@@ -302,7 +247,7 @@ public:
 // controllers/ProductController.h
 class ProductController : public drogon::HttpController<ProductController> {
 private:
-    ProductService productService;
+    ProductManager productManager;
     // ... endpoints
 };
 ```
@@ -314,8 +259,8 @@ private:
 - ✅ **Encapsulamento** - Dados privados, acesso via getters/setters
 - ✅ **Separação de Responsabilidades** - Cada classe tem um propósito único
 - ✅ **Abstração** - DAOs abstraem detalhes do BD
-- ✅ **Reusabilidade** - Services, Utils e DVOs reutilizáveis
-- ✅ **Dependência Injetada** - Controllers recebem Services
+- ✅ **Reusabilidade** - Manager, Utils reutilizáveis
+- ✅ **Dependência Injetada** - Controllers recebem Manager
 - ✅ **DVO Pattern** - Valores imutáveis do domínio
 
 ---
